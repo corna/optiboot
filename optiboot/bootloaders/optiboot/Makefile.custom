@@ -13,3 +13,11 @@ wildfire:
 	mv $(PROGRAM)_$(CHIP).hex $(PROGRAM)_$(TARGET).hex
 	mv $(PROGRAM)_$(CHIP).lst $(PROGRAM)_$(TARGET).lst
 
+atmega328_485: TARGET = atmega328
+atmega328_485: MCU_TARGET = atmega328p
+atmega328_485: CFLAGS += $(COMMON_OPTIONS) -DBAUD_RATE=57600 -DRS485=D2
+atmega328_485: AVR_FREQ ?= 18432000L
+atmega328_485: LIBS += -latmega328p
+atmega328_485: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega328_485: $(PROGRAM)_flash_rs485_atmega328p_57600_18432000L.hex
+atmega328_485: $(PROGRAM)_flash_rs485_atmega328p_57600_18432000L.lst

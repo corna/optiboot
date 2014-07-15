@@ -176,6 +176,11 @@ SOFT_UART_CMD = -DSOFT_UART=1
 dummy = FORCE
 endif
 
+ifdef RS485
+RS485_CMD = -DRS485=$(RS485)
+dummy = FORCE
+endif
+
 ifdef LED_DATA_FLASH
 LED_DATA_FLASH_CMD = -DLED_DATA_FLASH=1
 dummy = FORCE
@@ -192,6 +197,7 @@ endif
 
 COMMON_OPTIONS = $(BAUD_RATE_CMD) $(LED_START_FLASHES_CMD) $(BIGBOOT_CMD)
 COMMON_OPTIONS += $(SOFT_UART_CMD) $(LED_DATA_FLASH_CMD) $(LED_CMD) $(SS_CMD)
+COMMON_OPTIONS += $(RS485_CMD)
 
 #UART is handled separately and only passed for devices with more than one.
 ifdef UART
